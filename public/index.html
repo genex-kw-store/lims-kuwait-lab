@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LIMS — نظام إدارة المختبر</title>
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div id="app">
+  <div id="loginView" class="login-wrap hidden">
+    <div class="login-card">
+      <div class="login-logo" style="color:var(--teal)"><svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v5.5L4.5 18a2 2 0 0 0 1.8 3h11.4a2 2 0 0 0 1.8-3L14 8.5V3"/><path d="M7.5 14h9"/></svg></div>
+      <h1 data-i18n="appTitle">نظام إدارة المختبر</h1>
+      <p class="muted" data-i18n="loginSub">سجل الدخول للمتابعة</p>
+      <input id="loginUser" data-i18n-ph="username" placeholder="اسم المستخدم" autocomplete="username">
+      <input id="loginPass" type="password" data-i18n-ph="password" placeholder="كلمة المرور" autocomplete="current-password">
+      <button class="btn primary block" id="loginBtn" data-i18n="login">دخول</button>
+      <div id="loginErr" class="err hidden"></div>
+      <div class="muted small" style="margin-top:14px" data-i18n="loginHint">admin / Admin@123 (تجريبي — غيّره فوراً)</div>
+    </div>
+  </div>
+  <div id="mainView" class="layout hidden">
+    <aside class="sidebar">
+      <div class="brand"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="M9 3h6M10 3v5.5L4.5 18a2 2 0 0 0 1.8 3h11.4a2 2 0 0 0 1.8-3L14 8.5V3"/><path d="M7.5 14h9"/></svg> <span id="brandName">LIMS</span></div>
+      <nav id="nav"></nav>
+    </aside>
+    <div class="content">
+      <header class="topbar">
+        <div id="pageTitle" class="page-title"></div>
+        <div class="top-actions">
+          <span id="maintBadge" class="badge warn hidden" data-i18n="maintenance">وضع الصيانة</span>
+          <button id="langBtn" class="btn ghost">English</button>
+          <span id="userChip" class="chip"></span>
+          <button id="logoutBtn" class="btn ghost" data-i18n="logout">خروج</button>
+        </div>
+      </header>
+      <main id="view"></main>
+    </div>
+  </div>
+  <div id="modalRoot"></div>
+</div>
+<script src="/vendor/chart.umd.js"></script>
+<script src="/vendor/JsBarcode.all.min.js"></script>
+<script src="/i18n.js"></script>
+<script src="/app.js"></script>
+</body>
+</html>

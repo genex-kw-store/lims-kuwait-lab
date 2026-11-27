@@ -1,0 +1,18 @@
+{
+  "name": "kuwait-lab-lims",
+  "version": "1.0.0",
+  "description": "Laboratory Information Management System (LIMS) for medical labs - bilingual AR/EN, Kuwait-ready",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "seed": "node src/seed.js",
+    "reset": "node src/reset.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.10.0",
+    "chart.js": "^4.6.2",
+    "express": "^4.21.2",
+    "jsbarcode": "^3.12.3",
+    "qrcode": "^1.5.4"
+  }
+}

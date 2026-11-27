@@ -1,0 +1,24 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>بوابة المريض | Patient Portal</title><link rel="stylesheet" href="/styles.css"></head>
+<body><div class="login-wrap"><div class="login-card" style="width:460px;text-align:start">
+<div style="text-align:center"><div class="login-logo">🧪</div><h1 style="font-size:19px">بوابة المريض · Patient Portal</h1></div>
+<div id="pLogin">
+<label>رقم الملف · File No</label><input id="pp_f" placeholder="P00001">
+<label>كود الدخول · Access Code</label><input id="pp_c" placeholder="مطبوع على الفاتورة">
+<button class="btn primary block" id="ppGo">دخول · Enter</button><div id="ppErr" class="err hidden">بيانات غير صحيحة · Invalid</div></div>
+<div id="pList" class="hidden"><h3 id="ppName"></h3><div id="ppRows"></div></div>
+</div></div>
+<script>
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+document.getElementById('ppGo').onclick=async()=>{
+  const f=document.getElementById('pp_f').value, c=document.getElementById('pp_c').value;
+  const r=await fetch(`/api/portal?file_no=${encodeURIComponent(f)}&code=${encodeURIComponent(c)}`);
+  if(!r.ok){document.getElementById('ppErr').classList.remove('hidden');return;}
+  const j=await r.json();
+  document.getElementById('pLogin').classList.add('hidden');
+  document.getElementById('pList').classList.remove('hidden');
+  document.getElementById('ppName').textContent=j.patient.name+' ('+j.patient.file_no+')';
+  document.getElementById('ppRows').innerHTML='<table class="tbl"><tbody>'+j.visits.map(v=>
+    `<tr><td>${v.visit_no}</td><td class="muted small">${v.created_at}</td><td>${v.approved===v.total&&v.total>0?`<a class="btn sm primary" target="_blank" href="/report/${v.id}?token=${v.report_token}">التقرير · Report</a>`:'<span class="muted">قيد التنفيذ…</span>'}</td></tr>`).join('')+'</tbody></table>';
+};
+</script></body></html>
